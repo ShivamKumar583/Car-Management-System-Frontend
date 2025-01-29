@@ -53,15 +53,10 @@ export const fetchCars = createAsyncThunk(
 // Fetch all cars available
 export const fetchAllCars = createAsyncThunk(
     'cars/fetchCars',
-    async ({  token }, { rejectWithValue }) => {
+    async (_, { rejectWithValue }) => {
       try {
         const response = await axios.get(
-          `${GET_ALL_CAR_API}/`, 
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+          `${GET_ALL_CAR_API}/`
         );
         console.log(response)
         return response.data.cars;

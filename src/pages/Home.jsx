@@ -25,19 +25,22 @@ const HomePage = () => {
   };
   
   useEffect(() => {
-    if (token) {
+    
       const fetchData = async () => {
         try {
-          const response = await dispatch(fetchAllCars({ token })).unwrap(); // Extract payload
+          const response = await dispatch(fetchAllCars()).unwrap(); // Extract payload
           setAllCars(response || []); // Ensure allCars is always an array
-          dispatch(fetchCars({ userId: id, token })); // Fetch user-specific cars
         } catch (error) {
           console.error('Error fetching cars:', error);
         }
       };
 
       fetchData();
-    }
+      if(token){
+        dispatch(fetchCars({ userId: id, token })); // Fetch user-specific cars
+      }
+
+  
   }, [token, id,removeCar]); // Added `id` in dependencies
 
   return (
